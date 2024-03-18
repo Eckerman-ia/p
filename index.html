@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>URL Iframe Generator</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+    #urlInput {
+        width: 80%;
+        padding: 10px;
+        font-size: 16px;
+    }
+    #iframeContainer {
+        margin-top: 20px;
+    }
+    iframe {
+        width: 100%;
+        height: 400px;
+        border: none;
+    }
+</style>
+</head>
+<body>
+    <input type="text" id="urlInput" placeholder="Enter URL and press Enter">
+    <div id="iframeContainer"></div>
+
+    <script>
+        document.getElementById('urlInput').addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault(); // prevent form submission
+                createIFrame();
+            }
+        });
+
+        function createIFrame() {
+            var url = document.getElementById('urlInput').value;
+            var iframeContainer = document.getElementById('iframeContainer');
+
+            var iframe = document.createElement('iframe');
+	var enc = btoa(url);
+alert(enc)
+            iframe.src = "https://fast-receive.com/?__cpo=" + enc;
+            iframe.setAttribute('allow', 'fullscreen');
+
+            // Clear the previous iframe if exists
+            while (iframeContainer.firstChild) {
+                iframeContainer.removeChild(iframeContainer.firstChild);
+            }
+
+            iframeContainer.appendChild(iframe);
+        }
+    </script>
+</body>
+</html>
